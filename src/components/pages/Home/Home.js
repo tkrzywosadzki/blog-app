@@ -9,6 +9,16 @@ const Home = (props) => {
     //console.log(posts);
     return (
         <div>
+            <Row className="mb-3">
+                <Col>
+                    <h1>All posts</h1>
+                </Col>
+                <Col className="d-flex justify-content-end">
+                    <Link key={props.id} to={`/post/add`}>
+                        <Button variant="outline-info">Add post</Button>
+                    </Link>
+                </Col>
+            </Row>
             <Row>
                 {posts.map(post => (
                     <Col key={post.id} md='4'>

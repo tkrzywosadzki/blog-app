@@ -4,6 +4,7 @@ import { getPostById } from "../../../redux/postsRedux";
 import { Navigate } from "react-router-dom";
 import { Row, Card, Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import RemovePost from "../../features/RemovePost/RemovePost";
 
 const Post = (props) => {
 
@@ -23,9 +24,7 @@ else return(
                 <Link key={props.id} to={`/post/edit/${postId}`}>
                     <Button className="me-1" variant="outline-info">Edit</Button>
                 </Link>
-                <Link key={props.id} to={`/post/edit/${postId}`}>
-                    <Button variant="outline-danger">Delete</Button>
-                </Link>
+                <RemovePost id={postData.id}/>
                 </Col>
             </Row>
             <Card className="border-0">
@@ -41,5 +40,3 @@ else return(
 };
 
 export default Post;
-
-//<Card.Title className='mb-3'>{postData.title}</Card.Title>
