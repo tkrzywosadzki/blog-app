@@ -4,49 +4,61 @@ import { useState } from "react";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { addPost } from "../../../redux/postsRedux";
 
+
 const AddPostForm = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const [published, setPublished] = useState('');
-    const [description, setDescription] = useState('');
+    const [publishedDate, setPublishedDate] = useState('');
+    const [shortDescription, setShortDescription] = useState('');
     const [content, setContent] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(addPost({title, author, published, description, content, postId: props.postId}));
+        dispatch(addPost({title, author, publishedDate, shortDescription, content, postId: props.postId}));
         setTitle('');
         setAuthor('');
-        setPublished('');
-        setDescription('');
+        setPublishedDate('');
+        setShortDescription('');
         setContent('');
         navigate('/');
     };
 
-
     return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+    <Row className="mx-5">
+        <div className="mb-2">
+            <h1>Add post</h1>
+        </div>
+        <Form onSubmit={handleSubmit}>
+            <Col>
+                <Form.Group className="mb-3" controlId="title">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control className="w-50" type="text" placeholder="Enter title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="author">
+                    <Form.Label>Author</Form.Label>
+                    <Form.Control className="w-50" type="text" placeholder="Enter author" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="published">
+                    <Form.Label>Published</Form.Label>
+                    <Form.Control className="w-50" type="text" placeholder="dd-mm-yyyy" value={publishedDate} onChange={(e) => setPublishedDate(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="description">
+                    <Form.Label>Short description</Form.Label>
+                    <Form.Control as="textarea" rows={5} placeholder="Short description" value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="content">
+                    <Form.Label>Main content</Form.Label>
+                    <Form.Control as="textarea" rows={10} placeholder="Main content" value={content} onChange={(e) => setContent(e.target.value)} />
+                </Form.Group>
+            </Col>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+        </Form>
+    </Row>
 
     );
 };
